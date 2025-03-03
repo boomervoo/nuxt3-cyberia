@@ -2,7 +2,7 @@
 
 <template>
     <section>
-        <h2 class="title">Главная страница</h2>
+        <h2 class="title">Контакты</h2>
     </section>
 </template>
 

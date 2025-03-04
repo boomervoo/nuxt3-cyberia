@@ -1,5 +1,6 @@
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
+
 export async function projectFetch(url: string, method: Method) {
     const apiUrl = useRuntimeConfig().public.apiBaseUrl;
     const headers: Record<string, string> = {

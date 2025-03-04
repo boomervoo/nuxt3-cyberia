@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Categories from '~/components/Categories.vue';
 import ProjectsApp from '~/components/ProjectsApp.vue';
+import FormApp from '~/components/FormApp.vue';
 </script>
 
 <template>

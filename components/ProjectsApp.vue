@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { useProjectStore } from '~/stores/projects';
-import { computed } from '@vue/runtime-core';
+import { storeToRefs } from 'pinia';
 
 const projectStore = useProjectStore();
 await projectStore.getProjects();
-const projects = projectStore.projects;
-const selectedProjectId = projectStore.currentCategoryId;
+const { projects, currentCategoryId } = storeToRefs(projectStore);
 
 const filteredProjects = computed(() => {
-    if (selectedProjectId === null) {
-        console.log(projects);
-        return projects;
+    if (currentCategoryId.value == null) {
+        return projects.value;
     }
-    console.log('Фильтруем проекты по категории:', selectedProjectId);
-    return projects.filter(
-        (project) => project.categories.id === selectedProjectId
+
+    console.log('Фильтруем проекты по категории:', currentCategoryId.value);
+    return projects.value.filter((project) =>
+        project.categories.some(
+            (category) => category.id === currentCategoryId.value
+        )
     );
 });
 </script>
@@ -143,7 +144,7 @@ const filteredProjects = computed(() => {
         &::before {
             position: absolute;
             content: '';
-            background-image: url('../img/arrow-mobile.svg');
+            background-image: url('/img/arrow-mobile.svg');
             width: 17px;
             height: 17px;
             top: 60%;

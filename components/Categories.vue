@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { useProjectStore } from '~/stores/projects';
+import {storeToRefs} from "pinia";
 
 const categoriesStore = useProjectStore();
 await categoriesStore.getCategories();
-const categories = categoriesStore.categories;
+const {categories, currentCategoryId } = storeToRefs(categoriesStore);
+
 
 const changeCategory = (id: number | null) => {
-    const categoryId = (categoriesStore.currentCategoryId = id);
-    categoriesStore.setSelectedCategoryId(categoryId);
-    console.log(categoryId);
+  if (currentCategoryId.value === id) {
+    categoriesStore.setSelectedCategoryId(null);
+  } else {
+    categoriesStore.setSelectedCategoryId(id);
+  }
 };
 </script>
 
@@ -21,6 +25,7 @@ const changeCategory = (id: number | null) => {
                     :key="category.id"
                     class="categories__link"
                     @click="changeCategory(category.id)"
+                    :class="{ activeCard: currentCategoryId === category.id }"
                 >
                     {{ category.name }}
                 </li>
@@ -51,6 +56,7 @@ const changeCategory = (id: number | null) => {
         border-radius: 7px;
         box-shadow: -5px 12px 41px 2px rgba(23, 27, 44, 0.75);
 
+
         &:hover {
             transition: 0.3s;
             color: #2d76f9;
@@ -60,5 +66,9 @@ const changeCategory = (id: number | null) => {
             color: #0a59e8;
         }
     }
+}
+
+.activeCard {
+background-color: #0a59e8;
 }
 </style>

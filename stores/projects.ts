@@ -16,6 +16,7 @@ export const useProjectStore = defineStore('projects', () => {
     const projects = ref<ProductsState[]>([]);
     const categories = ref<CategoriesState[]>([]);
     const currentCategoryId = ref<number | null>(null);
+    console.log(currentCategoryId)
 
     const getProjects = async () => {
         try {

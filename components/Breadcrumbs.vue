@@ -53,6 +53,10 @@
 }
 
 @media (max-width: 375px) {
+    .breadcrumbs {
+        padding: 42px 0 0;
+    }
+
     .breadcrumb {
         &__one {
             font-size: 12px;
@@ -63,10 +67,6 @@
             color: #9aa8ba;
             font-size: 12px;
         }
-    }
-
-    .crump {
-        padding-top: 45px;
     }
 }
 </style>

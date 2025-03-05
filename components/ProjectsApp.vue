@@ -65,7 +65,7 @@ const filteredProjects = computed(() => {
 .cards {
     margin: 0;
     padding: 0;
-    padding-bottom: 103px;
+    padding-bottom: 66px;
 
     &__items {
         margin: 0;
@@ -86,6 +86,7 @@ const filteredProjects = computed(() => {
 .card {
     position: relative;
     transition: transform 0.3s ease-in-out;
+    height: 100%;
 
     &__image {
         height: 380px;

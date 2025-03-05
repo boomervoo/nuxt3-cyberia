@@ -4,19 +4,19 @@ import type { ICategory } from '~/models/entites/categories';
 import { ref } from 'vue';
 import { projectFetch } from '~/api/request';
 
-interface ProductsState {
+type ProductsState = {
     items: IProject[];
-}
+};
 
-interface CategoriesState {
+type CategoriesState = {
     items: ICategory[];
-}
+};
 
 export const useProjectStore = defineStore('projects', () => {
     const projects = ref<ProductsState[]>([]);
     const categories = ref<CategoriesState[]>([]);
     const currentCategoryId = ref<number | null>(null);
-    console.log(currentCategoryId)
+    console.log(currentCategoryId);
 
     const getProjects = async () => {
         try {

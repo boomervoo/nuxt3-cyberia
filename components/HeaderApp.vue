@@ -2,7 +2,13 @@
     <header class="header">
         <div class="header-container">
             <a href="#" class="logo">
-                <img class="logo__img" src="~/public/img/logo.svg" alt="logo" />
+                <NuxtLink to="/">
+                    <img
+                        class="logo__img"
+                        src="~/public/img/logo.svg"
+                        alt="logo"
+                    />
+                </NuxtLink>
             </a>
             <nav class="nav">
                 <ul class="nav__items list-reset">
@@ -31,12 +37,14 @@
                     </li>
                 </ul>
             </nav>
+            <BurgerMenu />
         </div>
     </header>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import BurgerMenu from './BurgerMenu';
 
 const burgerVisible = ref(false);
 
@@ -133,10 +141,13 @@ onUnmounted(() => {
     }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 375px) {
     .header-container {
-        padding: 56px 10px 21px 0;
+        position: relative;
+        width: 100vw;
+        padding: 55px 25px 21px 28px;
         background: #20212c;
+        margin-left: -7vw;
     }
 }
 </style>

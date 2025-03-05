@@ -88,10 +88,23 @@ ul {
   cursor: pointer;
 }
 
+.title-page {
+  margin: 0;
+  padding: 66px 0 72px 0;
+  font-weight: 600;
+  font-size: 41px;
+  color: #eef3ff;
+}
+
 @media (max-width:576px) {
   .container {
     padding-right: 25px;
     padding-left: 25px;
+  }
+
+  .title-page {
+    padding: 30px 0 20px 0;
+    font-size: 21px;
   }
 }
 

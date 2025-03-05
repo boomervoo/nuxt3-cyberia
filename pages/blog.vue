@@ -2,14 +2,8 @@
 
 <template>
     <section>
-        <h2 class="title">Блог</h2>
+        <h2 class="title-page">Блог</h2>
     </section>
 </template>
 
-<style lang="scss">
-.title {
-    font-weight: 600;
-    font-size: 48px;
-    color: #eef3ff;
-}
-</style>
+<style lang="scss"></style>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { sendFeedback } from '~/api/feedback';
+import { sendFeedback } from '~/api/request';
 import useVuelidate from '@vuelidate/core';
 import { required, email, helpers } from '@vuelidate/validators';
+import Button from '~/components/Button.vue';
 
 const form = reactive({
     name: '',
@@ -10,6 +11,7 @@ const form = reactive({
     message: '',
     agreement: false,
 });
+
 const resetForm = () => {
     form.name = '';
     form.email = '';
@@ -42,7 +44,7 @@ const rules = {
     agreement: {
         required: helpers.withMessage(
             'Поле обязательно',
-            (value: boolean) => value === true
+            (value: boolean) => value
         ),
     },
 };
@@ -60,7 +62,7 @@ const onSubmit = () => {
         formData.append('message', form.message);
         formData.append('message', form.message);
 
-        sendFeedback(formData);
+        sendFeedback(formData, 'POST');
         console.log('Форма успешно отправлена:', form);
         resetForm();
         v$.value.$reset();
@@ -75,7 +77,7 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
 
 <template>
     <section class="feedback">
-        <div class="container">
+        <div>
             <h2 class="title feedback__title">
                 Расскажите о&nbsp;вашем проекте:
             </h2>
@@ -89,7 +91,7 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                             placeholder=""
                             id="name"
                         />
-                        <label for="name" class="form__label">Имя</label>
+                        <label for="name" class="form__label">Ваше имя*</label>
                         <span v-if="v$.name.$error" class="error">
                             {{ nameError }}
                         </span>
@@ -102,7 +104,7 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                             placeholder=""
                             id="email"
                         />
-                        <label for="email" class="form__label">Email</label>
+                        <label for="email" class="form__label">Email*</label>
                         <span v-if="v$.email.$error" class="error">
                             {{ emailError }}
                         </span>
@@ -119,24 +121,20 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                             {{ phoneError }}
                         </span>
 
-                        <label for="phone" class="form__label">Телефон</label>
+                        <label for="phone" class="form__label">Телефон*</label>
                     </div>
-
-                    <div class="form__message-wrapper">
-                        <textarea
-                            v-model="form.message"
-                            type="text"
-                            id="message"
-                            placeholder=""
-                            class="form__message-textarea"
-                        ></textarea>
-                        <label for="message" class="form__label">
-                            Сообщение
-                        </label>
-                        <span v-if="v$.message.$error" class="error">
-                            {{ messageError }}
-                        </span>
-                    </div>
+                </div>
+                <div class="form__message-wrapper">
+                    <textarea
+                        v-model="form.message"
+                        type="text"
+                        id="message"
+                        :placeholder="v$.message.$error ? messageError : ''"
+                        class="form__message-textarea"
+                    ></textarea>
+                    <label for="message" class="form__label">
+                        Сообщение*
+                    </label>
                 </div>
                 <div class="form__send">
                     <label for="checkbox" class="form__checkbox">
@@ -155,13 +153,7 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                         </span>
                     </label>
                     <div class="button">
-                        <button
-                            id="project-button"
-                            type="submit"
-                            class="checkbox__btn"
-                        >
-                            Обсудить проект
-                        </button>
+                        <Button />
                     </div>
                 </div>
             </form>
@@ -182,6 +174,10 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: #fff;
 }
 
+textarea::placeholder {
+    color: red;
+}
+
 @mixin spanPosition {
     position: relative;
     top: 9px;
@@ -198,69 +194,15 @@ input:-webkit-autofill:active {
 
 .feedback {
     &__title {
-        margin-bottom: 72px;
+        margin: 0 0 90px 0;
+        padding: 35px 0 0 0;
         max-width: 385px;
         font-weight: 600;
-        font-size: 40px;
+        font-size: 41px;
         line-height: 56px;
         letter-spacing: 0.7px;
         color: #eff3ff;
     }
-}
-
-.form__input-wrapper {
-    position: relative;
-}
-
-.form__input {
-    color: #eff3ff;
-    background: transparent;
-    border: 1px solid #9aa8ba;
-    border-radius: 8px;
-    outline: none;
-    padding: 15px 0 15px 10px;
-    transition: border-color 0.2s;
-    width: 100%;
-}
-
-.form__label {
-    padding: 1px 15px;
-    background-color: #2f2f3d;
-    position: absolute;
-    left: 10px;
-    top: -6px;
-    color: #eff3ff;
-    transition: top 0.6s ease-in-out;
-}
-
-//.form__input:focus + .form__label {
-//    top: -10px;
-//}
-//.form__input:not(:placeholder-shown) + .form__label {
-//    top: -10px;
-//}
-
-.form__message-wrapper {
-    width: 100%;
-    border: 1px solid #9aa8ba;
-    border-radius: 8px;
-    margin: 0 0 30px;
-    min-height: 210px;
-    position: relative;
-}
-.form__message-textarea {
-    color: #eff3ff;
-    position: relative;
-    resize: none;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 10px 0 20px 20px;
-    width: 100%;
-    height: 100%;
-    max-height: 120px;
 }
 
 .form {
@@ -270,9 +212,58 @@ input:-webkit-autofill:active {
 
     &__block {
         position: relative;
-        margin-bottom: 21px;
+        margin-bottom: 38px;
         display: flex;
         gap: 40px;
+    }
+
+    &__input-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    &__input {
+        color: #eff3ff;
+        background: transparent;
+        border: 1px solid #9aa8ba;
+        border-radius: 8px;
+        outline: none;
+        padding: 15px 0 15px 10px;
+        transition: border-color 0.2s;
+        width: 100%;
+    }
+
+    &__label {
+        padding: 1px 15px;
+        background-color: #2d2d3a;
+        position: absolute;
+        left: 22px;
+        top: -9px;
+        color: #eff3ff;
+        transition: top 0.6s ease-in-out;
+    }
+
+    &__message-wrapper {
+        width: 100%;
+        border: 1px solid #9aa8ba;
+        border-radius: 8px;
+        margin: 0 0 30px;
+        min-height: 142px;
+        position: relative;
+    }
+
+    &__message-textarea {
+        color: #eff3ff;
+        position: relative;
+        resize: none;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 0 20px 20px;
+        width: 100%;
+        height: 136px;
     }
 
     &__input {
@@ -317,7 +308,7 @@ input:-webkit-autofill:active {
     }
 
     &__send {
-        padding-top: 39px;
+        padding-top: 10px;
     }
 }
 
@@ -387,51 +378,11 @@ input:-webkit-autofill:active {
     &__input:focus + &__span::before {
         outline: 2px solid #2e76f9; /* добавляем outline при фокусе */
     }
-
-    &__btn {
-        --opacity: 1;
-        --opacityColor: 1;
-        cursor: pointer;
-        border: 1px solid #2d76f9;
-        border-radius: 85px;
-        padding: 20px 55px;
-        background: #2d76f9;
-        font-weight: 400;
-        font-size: 18px;
-        color: #fff;
-        opacity: var(--opacity);
-        transition:
-            opacity 0.3s ease-in-out,
-            color 0.3s ease-in-out;
-
-        &:hover {
-            --opacity: 0.7;
-        }
-        &:active {
-            --opacity: 0.9;
-        }
-    }
 }
 
 .error {
-    left: 0px;
-    bottom: 0px;
-    position: relative;
-    color: red;
-    font-size: 0.875em;
-}
-
-.error-agreement {
-    left: 0px;
-    bottom: 0px;
-    position: relative;
-    color: red;
-    font-size: 0.875em;
-}
-
-.error-message {
-    left: 0px;
-    bottom: 0px;
+    left: 0;
+    bottom: 0;
     position: relative;
     color: red;
     font-size: 0.875em;
@@ -451,7 +402,7 @@ input:-webkit-autofill:active {
             flex-direction: column;
         }
 
-        &__label {
+        &__input-wrapper {
             position: relative;
             width: 100%;
         }
@@ -463,7 +414,7 @@ input:-webkit-autofill:active {
         font-size: 13px;
         color: #eef3ff;
         top: 20px;
-        left: 0px;
+        left: 0;
         letter-spacing: 0.3px;
         background: none;
     }
@@ -492,7 +443,7 @@ input:-webkit-autofill:active {
             &::before {
                 position: absolute;
                 content: '';
-                background-image: url('../img/planet.svg');
+                background-image: url('/img/planet.svg');
                 width: 76px;
                 height: 70px;
                 left: 0px;
@@ -554,7 +505,6 @@ input:-webkit-autofill:active {
             position: absolute;
             bottom: 16px;
             content: 'Нажимая “Отправить”, Вы даете согласие на обработку персональных данных';
-            font-family: var(--second-family);
             font-weight: 400;
             font-size: 13px;
             text-align: center;

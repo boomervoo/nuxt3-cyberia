@@ -88,7 +88,7 @@ const filteredProjects = computed(() => {
     transition: transform 0.3s ease-in-out;
 
     &__image {
-        height: 378px;
+        height: 380px;
         border-radius: 12px;
     }
 

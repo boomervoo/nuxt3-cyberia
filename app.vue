@@ -1,7 +1,4 @@
-<script setup lang="ts">
-const apiUrl = useRuntimeConfig().public.apiFeedbacksUrl;
-console.log(apiUrl);
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <NuxtLayout>

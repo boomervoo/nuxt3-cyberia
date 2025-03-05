@@ -58,6 +58,7 @@ const feedbackPush = () => {
                 enctype="multipart/form-data"
             >
                 <div class="form__input-wrapper">
+                    type="text"
                     <input
                         v-model="form.email"
                         type="email"

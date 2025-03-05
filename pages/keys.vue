@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Categories from '~/components/Categories.vue';
 import ProjectsApp from '~/components/ProjectsApp.vue';
-import FormApp from '~/components/FormApp.vue';
+import FormFeedback from '~/components/FormFeedback.vue';
 </script>
 
 <template>
@@ -9,6 +9,7 @@ import FormApp from '~/components/FormApp.vue';
         <h2 class="title">Кейсы</h2>
         <Categories />
         <ProjectsApp />
+        <FormFeedback />
     </section>
 </template>
 

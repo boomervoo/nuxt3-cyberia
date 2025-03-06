@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watchEffect } from '@vue/runtime-core';
+import { watch } from '@vue/runtime-core';
 import { useMediaQuery } from '@vueuse/core';
 
 const btnText = ref<string>('');
@@ -7,7 +7,7 @@ const btnText = ref<string>('');
 const isDisplayMobile = useMediaQuery('(max-width: 375px)');
 const isDisplayDesktop = useMediaQuery('(min-width: 376px)');
 
-watchEffect(() => {
+watch(() => {
     if (isDisplayMobile.value) {
         btnText.value = 'Отправить';
     } else if (isDisplayDesktop.value) {
@@ -44,6 +44,13 @@ watchEffect(() => {
     }
     &:active {
         --opacity: 0.9;
+    }
+}
+
+@media (max-width: 375px) {
+    .btn {
+        padding: 15px 126px;
+        font-size: 14px;
     }
 }
 </style>

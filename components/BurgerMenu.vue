@@ -12,11 +12,40 @@ const open = ref(false);
                 <div class="burger__navigation-block">
                     <nav class="burger__menu-navigation menu">
                         <ul class="menu">
-                            <li class="menu__link">О нас</li>
-                            <li class="menu__link">Услуги</li>
-                            <li class="menu__link">Проекты</li>
-                            <li class="menu__link">Блог</li>
-                            <li class="menu__link">Контакты</li>
+                            <li class="menu__link">
+                                <NuxtLink
+                                    class="menu__link-burger"
+                                    to="/agency"
+                                >
+                                    Агентство
+                                </NuxtLink>
+                            </li>
+                            <li class="menu__link">
+                                <NuxtLink
+                                    class="menu__link-burger"
+                                    to="/services"
+                                >
+                                    Услуги
+                                </NuxtLink>
+                            </li>
+                            <li class="menu__link">
+                                <NuxtLink class="menu__link-burger" to="/keys">
+                                    Кейсы
+                                </NuxtLink>
+                            </li>
+                            <li class="menu__link">
+                                <NuxtLink class="menu__link-burger" to="/blog">
+                                    Блог
+                                </NuxtLink>
+                            </li>
+                            <li class="menu__link">
+                                <NuxtLink
+                                    class="menu__link-burger"
+                                    to="/contacts"
+                                >
+                                    Контакты
+                                </NuxtLink>
+                            </li>
                         </ul>
                     </nav>
 
@@ -33,7 +62,9 @@ const open = ref(false);
                     <a href="mailto:hello@cyberia.ru" class="contacts__email"
                         >hello@cyberia.ru</a
                     >
-                    <a href="" class="contacts__address">Аносова 3Б, оф. 1</a>
+                    <a href="" class="contacts__address"
+                        >ул.Ярных, д.35, оф.10</a
+                    >
                 </div>
                 <div class="burger__line"></div>
             </div>
@@ -71,7 +102,7 @@ const open = ref(false);
         position: absolute;
         content: '';
         top: 10px;
-        right: 0px;
+        right: 0;
         display: block;
         width: 24px;
         height: 3px;
@@ -81,7 +112,7 @@ const open = ref(false);
         &::before {
             content: '';
             top: 10px;
-            right: 0px;
+            right: 0;
             display: block;
             position: absolute;
             width: 24px;
@@ -93,7 +124,7 @@ const open = ref(false);
         &::after {
             content: '';
             bottom: 10px;
-            right: 0px;
+            right: 0;
             display: block;
             position: absolute;
             width: 24px;
@@ -115,7 +146,7 @@ const open = ref(false);
     }
 
     &__menu {
-        padding: 97px 92px 145px 67px;
+        padding: 53px 31px 0 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -124,7 +155,7 @@ const open = ref(false);
     &__navigation-block {
         display: flex;
         justify-content: space-between;
-        padding-bottom: 68px;
+        padding-bottom: 20px;
     }
 
     &__menu-navigation {
@@ -187,7 +218,7 @@ const open = ref(false);
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 34px;
 
     &__link {
         cursor: pointer;
@@ -199,6 +230,12 @@ const open = ref(false);
             border-bottom: 1px solid #2d76f9;
         }
     }
+
+    &__link-burger {
+        font-weight: 400;
+        font-size: 18px;
+        color: #eef3ff;
+    }
 }
 
 .contacts {
@@ -208,6 +245,7 @@ const open = ref(false);
 
     &__title {
         padding-top: 38px;
+        margin-bottom: 5px;
     }
 
     &__number {

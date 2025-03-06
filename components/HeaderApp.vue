@@ -149,5 +149,9 @@ onUnmounted(() => {
         background: #20212c;
         margin-left: -7vw;
     }
+
+    .logo__img {
+        width: 92px;
+    }
 }
 </style>

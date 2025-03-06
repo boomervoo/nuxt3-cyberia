@@ -88,26 +88,24 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                             v-model="form.name"
                             type="text"
                             class="form__input"
-                            placeholder=""
+                            :placeholder="
+                                v$.name.$error ? nameError : undefined
+                            "
                             id="name"
                         />
                         <label for="name" class="form__label">Ваше имя*</label>
-                        <span v-if="v$.name.$error" class="error">
-                            {{ nameError }}
-                        </span>
                     </div>
                     <div class="form__input-wrapper">
                         <input
                             v-model="form.email"
                             type="email"
                             class="form__input"
-                            placeholder=""
+                            :placeholder="
+                                v$.email.$error ? emailError : undefined
+                            "
                             id="email"
                         />
                         <label for="email" class="form__label">Email*</label>
-                        <span v-if="v$.email.$error" class="error">
-                            {{ emailError }}
-                        </span>
                     </div>
                     <div class="form__input-wrapper">
                         <input
@@ -115,12 +113,10 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                             type="number"
                             id="phone"
                             class="form__input"
-                            placeholder=""
+                            :placeholder="
+                                v$.phone.$error ? phoneError : undefined
+                            "
                         />
-                        <span v-if="v$.phone.$error" class="error">
-                            {{ phoneError }}
-                        </span>
-
                         <label for="phone" class="form__label">Телефон*</label>
                     </div>
                 </div>
@@ -129,10 +125,15 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                         v-model="form.message"
                         type="text"
                         id="message"
-                        :placeholder="v$.message.$error ? messageError : ''"
+                        :placeholder="
+                            v$.message.$error ? messageError : undefined
+                        "
                         class="form__message-textarea"
                     ></textarea>
-                    <label for="message" class="form__label">
+                    <label
+                        for="message"
+                        class="form__label form__label-message"
+                    >
                         Сообщение*
                     </label>
                 </div>
@@ -148,7 +149,10 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                         <span class="checkbox__span"
                             >Согласие на обработку персональных данных</span
                         >
-                        <span v-if="v$.message.$error" class="error">
+                        <span
+                            v-if="v$.message.$error"
+                            class="error__checkbox error"
+                        >
                             {{ agreementError }}
                         </span>
                     </label>
@@ -175,7 +179,12 @@ input:-webkit-autofill:active {
 }
 
 textarea::placeholder {
+    font-size: 15px;
     color: red;
+}
+input::placeholder {
+    color: red;
+    font-size: 14px;
 }
 
 @mixin spanPosition {
@@ -261,7 +270,7 @@ textarea::placeholder {
         outline: none;
         font-size: 16px;
         font-weight: 400;
-        padding: 10px 0 20px 20px;
+        padding: 16px 0 20px 14px;
         width: 100%;
         height: 136px;
     }
@@ -306,10 +315,6 @@ textarea::placeholder {
             position: relative;
         }
     }
-
-    &__send {
-        padding-top: 10px;
-    }
 }
 
 .label__span {
@@ -322,11 +327,11 @@ textarea::placeholder {
     }
 
     &__email {
-        padding: 0px 12px;
+        padding: 0 12px;
     }
 
     &__number {
-        padding: 0px 12px;
+        padding: 0 12px;
     }
 }
 
@@ -385,7 +390,7 @@ textarea::placeholder {
     bottom: 0;
     position: relative;
     color: red;
-    font-size: 0.875em;
+    font-size: 14px;
 }
 
 .button {
@@ -446,7 +451,7 @@ textarea::placeholder {
                 background-image: url('/img/planet.svg');
                 width: 76px;
                 height: 70px;
-                left: 0px;
+                left: 0;
                 bottom: -1px;
             }
         }
@@ -462,8 +467,15 @@ textarea::placeholder {
             gap: 22px;
         }
 
-        &_label {
-            position: relative;
+        &__label {
+            top: 19px;
+            background-color: transparent;
+            left: -1px;
+            font-size: 13px;
+        }
+
+        &__label-message {
+            top: 7px;
         }
     }
 
@@ -473,7 +485,7 @@ textarea::placeholder {
         font-size: 13px;
         color: #eef3ff;
         top: 20px;
-        left: 0px;
+        left: 0;
         letter-spacing: 0.3px;
     }
 
@@ -495,7 +507,7 @@ textarea::placeholder {
     }
 
     .form__send {
-        padding-top: 38px;
+        padding-top: 9px;
     }
 
     .button {
@@ -510,6 +522,12 @@ textarea::placeholder {
             text-align: center;
             line-height: 19px;
             color: #eef3ff;
+        }
+    }
+
+    .error {
+        &__checkbox {
+            display: none;
         }
     }
 }

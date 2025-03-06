@@ -61,7 +61,7 @@
                         </li>
                         <li class="nav__item">
                             <NuxtLink class="nav__link" to="/contacts">
-                                Контакты
+                                {{ contactLinkName }}
                             </NuxtLink>
                         </li>
                     </ul>
@@ -71,22 +71,21 @@
     </footer>
 </template>
 
-<script setup>
-import { onMounted } from 'vue';
+<script setup lang="ts">
+import { watch } from '@vue/runtime-core';
+import { useMediaQuery } from '@vueuse/core';
 
-function updateContactText() {
-    const contactLink = document.getElementById('nav-contact');
+const isDisplayMobile = useMediaQuery('(max-width: 375px)');
+const isDisplayDesktop = useMediaQuery('(min-width: 376px)');
 
-    if (window.innerWidth <= 375) {
-        contactLink.textContent = 'Вопросы';
-    } else {
-        contactLink.textContent = 'Контакты';
+const contactLinkName = ref<string>();
+
+watch(() => {
+    if (isDisplayMobile.value) {
+        contactLinkName.value = 'Вопросы';
+    } else if (isDisplayDesktop.value) {
+        contactLinkName.value = 'Контакты';
     }
-}
-
-onMounted(() => {
-    window.addEventListener('resize', updateContactText);
-    window.addEventListener('load', updateContactText);
 });
 </script>
 

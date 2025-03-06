@@ -56,11 +56,13 @@ const open = ref(false);
                 <div class="burger__line"></div>
                 <div class="contacts contact">
                     <h5 class="contacts__title">Контакты:</h5>
-                    <a href="tel:+7 499 679 45 79" class="contacts__number"
-                        >+7 499 679 45 79</a
+                    <a href="tel:+79991234567" class="contacts__number"
+                        >+7 999 123 45 67</a
                     >
-                    <a href="mailto:hello@cyberia.ru" class="contacts__email"
-                        >hello@cyberia.ru</a
+                    <a
+                        href="mailto:hello@cyberia.studio"
+                        class="contacts__email"
+                        >hello@cyberia.studio</a
                     >
                     <a href="" class="contacts__address"
                         >ул.Ярных, д.35, оф.10</a
@@ -146,7 +148,7 @@ const open = ref(false);
     }
 
     &__menu {
-        padding: 53px 31px 0 25px;
+        padding: 44px 33px 0 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -155,11 +157,11 @@ const open = ref(false);
     &__navigation-block {
         display: flex;
         justify-content: space-between;
-        padding-bottom: 20px;
+        padding-bottom: 49px;
     }
 
     &__menu-navigation {
-        padding: 34px 0 0 0;
+        padding: 41px 0 0 0;
         display: flex;
         flex-direction: column;
         color: #000000;
@@ -239,13 +241,13 @@ const open = ref(false);
 }
 
 .contacts {
-    padding-bottom: 68px;
+    padding-bottom: 46px;
     display: flex;
     flex-direction: column;
 
     &__title {
         padding-top: 38px;
-        margin-bottom: 5px;
+        margin: 0 0 5px 0;
     }
 
     &__number {

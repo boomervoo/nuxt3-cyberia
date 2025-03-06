@@ -8,8 +8,10 @@ import FooterApp from '~/components/FooterApp.vue';
     <div>
         <div class="container">
             <HeaderApp />
-            <Breadcrumbs />
-            <slot />
+            <main>
+                <Breadcrumbs />
+                <slot />
+            </main>
         </div>
         <FooterApp />
     </div>

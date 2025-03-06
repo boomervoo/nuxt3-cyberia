@@ -43,23 +43,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
 import BurgerMenu from './BurgerMenu';
-
-const burgerVisible = ref(false);
-
-const checkWindowSize = () => {
-    burgerVisible.value = window.innerWidth <= 768;
-};
-
-onMounted(() => {
-    checkWindowSize();
-    window.addEventListener('resize', checkWindowSize);
-});
-
-onUnmounted(() => {
-    window.addEventListener('resize', checkWindowSize);
-});
 </script>
 
 <style lang="scss">

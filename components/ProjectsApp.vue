@@ -32,7 +32,7 @@ const filteredProjects = computed(() => {
                     <a class="card__link" href="#">
                         <img
                             :src="card.image"
-                            alt="image"
+                            alt="Card image"
                             class="card__image card__arrow"
                             :style="
                                 card.id === 3 ? 'transform: scale(-1, 1)' : ''

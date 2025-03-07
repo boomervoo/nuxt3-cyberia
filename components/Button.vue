@@ -18,7 +18,7 @@ watch(() => {
 
 <template>
     <button id="project-button" type="submit" class="btn checkbox__btn">
-        {{ btnText }}
+        <slot />
     </button>
 </template>
 

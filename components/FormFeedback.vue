@@ -157,7 +157,7 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
                         </span>
                     </label>
                     <div class="button">
-                        <Button />
+                        <Button>Обсудить проект</Button>
                     </div>
                 </div>
             </form>
@@ -166,6 +166,8 @@ const agreementError = computed(() => v$.value.agreement.$errors[0]?.$message);
 </template>
 
 <style lang="scss">
+@use '../assets/css/mixins' as *;
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -185,20 +187,6 @@ textarea::placeholder {
 input::placeholder {
     color: red;
     font-size: 14px;
-}
-
-@mixin spanPosition {
-    position: relative;
-    top: 9px;
-    left: 25px;
-    padding: 0 5px;
-    background: #2f2f3c;
-    font-family: var(--font-family);
-    font-weight: 300;
-    font-size: 16px;
-    color: #eff3ff;
-    transition: 0.2s;
-    pointer-events: none;
 }
 
 .feedback {

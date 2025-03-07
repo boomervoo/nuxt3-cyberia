@@ -4,9 +4,10 @@ import { storeToRefs } from 'pinia';
 
 const categoriesStore = useProjectStore();
 await categoriesStore.getCategories();
+await categoriesStore.setSelectedCategoryId();
 const { categories, currentCategoryId } = storeToRefs(categoriesStore);
 
-const changeCategory = (id: number | null) => {
+const filterCategory = (id: number | null) => {
     if (currentCategoryId.value === id) {
         categoriesStore.setSelectedCategoryId(null);
     } else {
@@ -17,19 +18,17 @@ const changeCategory = (id: number | null) => {
 
 <template>
     <div class="categories">
-        <nav class="categories__navigation">
-            <ul class="categories__list">
-                <li
-                    v-for="category in categories"
-                    :key="category.id"
-                    class="categories__link"
-                    @click="changeCategory(category.id)"
-                    :class="{ activeCard: currentCategoryId === category.id }"
-                >
-                    {{ category.name }}
-                </li>
-            </ul>
-        </nav>
+        <ul class="categories__list">
+            <li
+                v-for="category in categories"
+                :key="category.id"
+                class="categories__link"
+                @click="filterCategory(category.id)"
+                :class="{ activeCard: currentCategoryId === category.id }"
+            >
+                {{ category.name }}
+            </li>
+        </ul>
     </div>
 </template>
 

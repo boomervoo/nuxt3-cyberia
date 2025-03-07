@@ -1,13 +1,11 @@
 <script setup></script>
 
 <template>
-    <section class="breadcrumbs">
-        <div class="breadcrumb">
-            <a class="breadcrumb__one" href="#">Главная</a>
-            <span class="slash">&thinsp; / &thinsp;</span>
-            <a class="breadcrumb__two" href="#">Кейсы</a>
-        </div>
-    </section>
+    <div class="breadcrumb">
+        <NuxtLink class="breadcrumb__one" to="#">Главная</NuxtLink>
+        <span class="slash">&thinsp; / &thinsp;</span>
+        <a class="breadcrumb__two" href="#">Кейсы</a>
+    </div>
 </template>
 
 <style lang="scss">
@@ -16,6 +14,7 @@
 }
 
 .breadcrumb {
+    padding: 65px 0 65px;
     font-size: 14px;
 
     &__one {

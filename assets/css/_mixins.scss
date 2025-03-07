@@ -1,0 +1,25 @@
+@mixin resetMarginPadding {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin textStyle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.1px;
+  color: #fff;
+}
+
+@mixin spanPosition {
+  position: relative;
+  top: 9px;
+  left: 25px;
+  padding: 0 5px;
+  background: #2f2f3c;
+  font-weight: 300;
+  font-size: 16px;
+  color: #eff3ff;
+  transition: 0.2s;
+  pointer-events: none;
+}

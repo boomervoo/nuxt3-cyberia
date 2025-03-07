@@ -5,16 +5,14 @@ import FooterApp from '~/components/FooterApp.vue';
 </script>
 
 <template>
-    <div>
-        <div class="container">
-            <HeaderApp />
-            <main>
-                <Breadcrumbs />
-                <slot />
-            </main>
-        </div>
-        <FooterApp />
+    <div class="container">
+        <HeaderApp />
+        <main>
+            <Breadcrumbs />
+            <slot />
+        </main>
     </div>
+    <FooterApp />
 </template>
 
 <style scoped></style>

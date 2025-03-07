@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { watch } from '@vue/runtime-core';
+import { useMediaQuery } from '@vueuse/core';
+
+const isDisplayMobile = useMediaQuery('(max-width: 375px)');
+const isDisplayDesktop = useMediaQuery('(min-width: 376px)');
+
+const contactLinkName = ref<string>();
+
+watch(() => {
+    if (isDisplayMobile.value) {
+        contactLinkName.value = 'Вопросы';
+    } else if (isDisplayDesktop.value) {
+        contactLinkName.value = 'Контакты';
+    }
+});
+</script>
+
 <template>
     <footer class="footer">
         <div class="container footer__container">
@@ -71,41 +89,8 @@
     </footer>
 </template>
 
-<script setup lang="ts">
-import { watch } from '@vue/runtime-core';
-import { useMediaQuery } from '@vueuse/core';
-
-const isDisplayMobile = useMediaQuery('(max-width: 375px)');
-const isDisplayDesktop = useMediaQuery('(min-width: 376px)');
-
-const contactLinkName = ref<string>();
-
-watch(() => {
-    if (isDisplayMobile.value) {
-        contactLinkName.value = 'Вопросы';
-    } else if (isDisplayDesktop.value) {
-        contactLinkName.value = 'Контакты';
-    }
-});
-</script>
-
 <style lang="scss">
-@mixin resetMarginPadding {
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --fontSize: 13px;
-}
-
-@mixin textStyle {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    letter-spacing: -0.1px;
-    color: #fff;
-}
+@use '../assets/css/mixins' as *;
 
 .footer {
     padding-top: 130px;
@@ -242,7 +227,7 @@ watch(() => {
         }
 
         &__sub--title {
-            font-size: var(--fontSize);
+            font-size: 13px;
         }
     }
 
@@ -253,7 +238,7 @@ watch(() => {
     .address__link,
     .address__descr,
     .nav__link {
-        font-size: var(--fontSize);
+        font-size: 13px;
     }
 }
 

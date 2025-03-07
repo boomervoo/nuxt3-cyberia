@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import BurgerMenu from './BurgerMenu';
+</script>
+
 <template>
     <header class="header">
         <div class="header-container">
@@ -42,19 +46,12 @@
     </header>
 </template>
 
-<script setup>
-import BurgerMenu from './BurgerMenu';
-</script>
-
 <style lang="scss">
 .header-container {
     display: flex;
     align-items: center;
     padding-top: 73px;
-}
-
-.logo {
-    margin-right: 190px;
+    gap: 190px;
 }
 
 .nav {
